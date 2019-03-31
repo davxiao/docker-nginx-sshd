@@ -1,0 +1,4 @@
+.DS_Store
+*.pub
+*.lock
+*.ssh
