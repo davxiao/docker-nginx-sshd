@@ -27,8 +27,8 @@ COPY nginx.conf /etc/nginx/
 COPY bootstrap.sh /root/
 RUN chmod +x /root/bootstrap.sh
 
-# If you need build something from scrach and drop all the deps 
-# to minimize the size of final image, see below
+# If you need to build something from scrach and drop all the deps afterwards 
+# so as to minimize the size of final image, use below commands
 #RUN apk add --no-cache --virtual .build-deps <<any-extra-pkgs-you-need-for-build>>
 #do some build here, then ...
 #RUN apk del .build-deps
@@ -43,6 +43,13 @@ RUN sed -i s/root:!/"root:*"/g /etc/shadow
 RUN ssh-keygen -A
 RUN sed -i "s/#PermitRootLogin.*/PermitRootLogin without-password/" /etc/ssh/sshd_config
 RUN sed -i "s/#PasswordAuthentication.*/PasswordAuthentication no/" /etc/ssh/sshd_config
+
+# Those env are not exported to the shell as it is not running as PID 1
+# so those must be exported manually to allow AWS CLI work properly
+RUN echo 'export $(strings /proc/1/environ | grep AWS_CONTAINER_CREDENTIALS_RELATIVE_URI)' >> /etc/profile.d/ash-profile.sh
+RUN echo 'export $(strings /proc/1/environ | grep AWS_EXECUTION_ENV)' >> /etc/profile.d/ash-profile.sh
+RUN echo 'export $(strings /proc/1/environ | grep ECS_CONTAINER_METADATA_URI)' >> /etc/profile.d/ash-profile.sh
+
 
 # Expose ports for nginx
 EXPOSE 80
