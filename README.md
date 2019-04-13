@@ -1,8 +1,8 @@
 # docker-nginx-sshd
 A minimal Docker image with sshd and nginx service. The following packages are included:
-nginx
-openssh
-bash
+* nginx
+* openssh
+* bash
 dumb-init
 python3
 tcpdump
