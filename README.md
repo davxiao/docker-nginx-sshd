@@ -17,9 +17,8 @@ A minimal Docker image with sshd and nginx service. The following packages are i
 
 This image is ONLY intended for non-prod use.
 
-For security reasons, the sshd is configured to allow only publickey access. You will need to place your own public key file `id_ed25519.pub` in the folder. If the private key is compromised, the container must be stopped immediately to prevent from unauthorized access.
+For security reasons, the sshd is configured to allow only publickey access. You will need to place your own public key file `id_rsa.pub` in the folder. If the private key is compromised, the container must be stopped immediately to prevent from unauthorized access.
 
-Compiled images can be found at https://cloud.docker.com/repository/docker/davxiao/nginx-sshd 
 
 TODO:
 - Add a script that gracefully export env variables from PID 1 to the shell
