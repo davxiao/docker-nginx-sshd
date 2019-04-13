@@ -3,16 +3,17 @@ A minimal Docker image with sshd and nginx service. The following packages are i
 * nginx
 * openssh
 * bash
-dumb-init
-python3
-tcpdump
-socat
-nfs-utils
-curl
-jq
-git
-tzdata
-AWS cli
+* dumb-init
+* python3
+* tcpdump
+* socat
+* nfs-utils
+* tzdata
+* curl
+* git
+* jq
+* yq
+* AWS cli
 
 This image is ONLY intended for non-prod use.
 
